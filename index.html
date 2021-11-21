@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang = "en"><!--document is in english-->
+<head>
+    <title>Prodigy</title>
+    <script type="text/javascript" src="PlayGame.js"></script>
+	<link rel="shortvut icon" type = "image/svg" href="images/favicon.svg">
+
+	<style>
+			body{
+				font-family: sans-serif;
+                background-image: url("https://www.slideteam.net/wp/wp-content/uploads/2020/05/Mathematics-Education-.png");
+                background-color: #cccccc;
+}
+			form{
+				color: black;
+			}
+
+			
+			.button{
+				font: inherit;
+				background: #C0C0C0;
+				padding: 3px 10px;
+				cursor: pointer;
+				border-radius: 7px;
+			}
+			
+			.button:active,
+			.button:hover{
+				background: #FFFF00;
+			}
+			
+			textarea{
+				margin: 50px;
+			}
+			
+			table {
+			border-radius:20px;
+			margin-left: auto;
+  			margin-right: auto;
+			width: 75%;
+			border-spacing: 20px;
+			padding: 10px;
+			}
+
+			th {
+				text-decoration:underline;
+				font-weight:bold;
+				font-size: 25px;
+			}
+
+			td{
+				align-content: center;
+			}
+
+			textarea {
+				background-color: #dddd;
+				color: black;
+				padding: 1px;
+				border: 2px solid transparent;
+				border-radius: 10px;
+				outline: none;
+				font-family: sans-serif;
+				line-height: 1.4;
+				transition: all 0.2;
+		
+			}
+
+			textarea:hover{
+				background-color: rgb(221, 221, 221);
+			}
+
+
+
+			.eq{
+				height: 90px;
+				text-align: center;
+				font-size: 25px;
+			}
+
+			.ans_edit{
+				height: 50px;
+				font-size: large;
+			}
+
+	</style>
+</head>
+<body>
+	<nav>
+		<img style="box-shadow: 0px 0px 10px #FFF;" src="images/math.png" width="30" height="30" alt="">
+		<span style="margin-right: 10px;text-shadow: 0px 0px 10px #FFF;" id="title"><b> <i>Math 4 kids </i></b></span>
+	</nav>
+
+
+
+    <!--Play Form-->
+    <div id="formdiv">
+        <form>
+			<table>
+				<tr>
+					<th>REGISTER </th>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td> <label for="fname"> <b>First Name: </b> </label> </td>
+					<td> <input type="text" id="fname" minlength="3"> </td>
+				</tr>
+				
+				<tr>
+					<td> <label for="lname"> <b>Last Name: </b> </label> </td>
+					<td> <input type="text" id="lname" minlength="3"> </td>
+				</tr>
+				
+				<tr>
+					<td> <label for="dob"> <b>Date Of Birth: </b> </label> </td>
+					<td> <input type="date" id="dob" min="2009-01-01" max="2013-12-31"> </td>
+				</tr>
+				
+				<tr>
+					<td> <label> <b>Gender: </b> </label> </td>
+					<td> <input type="radio" id="gender_male" value="Male" name="gender">Male </td>
+					<td> <input type="radio" id="gender_female" value="Female" name="gender">Female </td>
+				</tr>
+				
+				<tr>
+					<td> <label for="email"> <b>Email: </b> </label> </td>
+					<td> <input type="email" id="email" ><!--pattern="[a-z0-9._%+-]@gmail.com"--> </td>
+				</tr>
+				
+				<tr>
+					<td> <button class = "button" type="button" id="registerbutton" onclick="Register()">Register</button> </td>		
+				</tr>
+				
+				<tr>
+					<th><i>PLAY GAME </i></th>
+				</tr>
+				
+				<tr>
+					<td> <button class = "button" type="button" id="playgamebutton" onclick="playGame()">Start</button> </td>
+				</tr>
+				
+				<tr> 
+					<td> <label><b>Equation: </b></label></label> </td>
+					<td> <input type = "text" class = "eq" id = "firstNumber" name = "firstNumber" disabled/> </td>
+					<td> <div class="multiply"> <img src="images/multiply.svg"></img> </div></td>
+					<td> <input type = "text" class = "eq" id = "secondNumber" name = "secondNumber" disabled/> </td>
+				</tr>
+				
+				</tr>
+					<td> <label for = "answer" > <b>Answer: </b> </label> </td>
+					<td> <input type = "number" class = "ans_edit" id = "answer" name = "answer"  disabled/> </td>
+				</tr>
+				
+				<tr> 
+					<td> <p id="isCorrect"></p> </td>
+				</tr> 
+				
+				<tr>
+					<td> <button class = "button" type="button" id="acceptbutton" onclick="checkAnswer()" > Accept </button>
+					<button class = "button" type="button" id="nextbutton" onclick="playGame()" > Next </button>
+					<button class = "button" type="button" id="endbutton" onclick="findPercentageScore()">End</button> </td>
+				</tr>
+				
+				<tr>
+					<td> <textarea name="showpercentage" id="showpercentage" cols="30" rows="10"></textarea> </td>
+					<td> </td> <td> </td>
+					<td> <textarea name="showallplayers" id="showallplayers" cols="30" rows="10" ></textarea> <td>
+				</tr>
+            </table>
+        </form>
+    </div>
+
+    <div id="charts">
+        <table>
+            <tr>
+                <td>
+                    <img src="bar.jpg" alt="Females to males" id="barpic"  width="0" height="100"/>
+                    <p>Females To Males</p>
+                </td>
+
+                <td>
+                    <img src="bar.jpg" alt="Less than 50%" id="lessfifty"  width="0" height="100"/>
+                    <p>Percentages &lt; 50</p>
+                </td>
+                <td>
+                    <img src="bar.jpg" alt="Less than 50%" id="fiftynine" width="0"  height="100"/>
+                    <p>Percentages 50 - 59</p>
+                </td >
+                <td>
+                    <img src="bar.jpg" alt="Less than 50%" id="sixtynine"  width="0" height="100"/>
+                    <p>Percentages 60 - 69</p>
+                </td>
+                <td>
+                    <img src="bar.jpg" alt="Less than 50%" id="seventynine" width="0"  height="100"/>
+                    <p>Percentages 70 - 79</p>
+                </td>
+                <td>
+                    <img src="bar.jpg" alt="Less than 50%" id="eightytynine"  width="0" height="100"/>
+                    <p>Percentages 80 - 89</p>
+                </td>
+                <td>
+                    <img src="bar.jpg" alt="Less than 50%" id="ningtynine" width="0"  height="100"/>
+                    <p>Percentages 90 - 99</p>
+                </td>
+                <td>
+                    <img src="bar.jpg" alt="Less than 50%" id="hundred" width="0" height="100"/>
+                    <p>Percentages = 100</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</html>
